@@ -8,8 +8,7 @@
 
 ## Bug fixes
 
-* Fixed bug where when `clean = TRUE`, strings were not coerced to lower case.
-  case (#105).
+* Fixed bug where when `clean = TRUE`, strings were not coerced to lower case (#105).
 * Fix argument `progress`, was inoperative (#107).
 
 # zoomerjoin 0.1.4
