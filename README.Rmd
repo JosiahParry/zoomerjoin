@@ -43,19 +43,6 @@ install.packages(zoomerjoin)
 ```
 
 
-### Installing from R-Universe:
-
-This package is distributed using [r-universe](https://r-universe.dev/search/),
-which provides pre-compiled binaries for common operating systems and recent
-versions of R. To install with r-universe, you can use the following command in
-R:
-
-```r
-install.packages(
-  'zoomerjoin',
-  repos = c('https://beniaminogreen.r-universe.dev', getOption("repos"))
-)
-```
 ### Installing Rust
 
 If your operating system or version of R is not installed, you must have the
