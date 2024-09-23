@@ -3,6 +3,7 @@ name = 'zoomerjoin'
 version = '0.1.0'
 edition = '2021'
 authors = ["Beniamino Green <beniamino.green@yale.edu>"]
+rust-version = "1.56"
 
 [lib]
 crate-type = ['staticlib']
@@ -18,3 +19,4 @@ nohash-hasher = "0.2.0"
 rand = "0.8.5"
 rayon = "1.6.1"
 rustc-hash = "1.1.0"
+
