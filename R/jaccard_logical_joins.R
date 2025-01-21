@@ -102,16 +102,18 @@ jaccard_inner_join <- function(a, b,
                                progress = FALSE,
                                clean = FALSE,
                                similarity_column = NULL) {
-  jaccard_join(a, b,
-    mode = "inner",
-    by = by, salt_by = block_by,
-    n_gram_width = n_gram_width,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = jaccard_join,
+            mode = "inner",
+            block_by = block_by,
+            n_gram_width = n_gram_width,
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -126,13 +128,17 @@ jaccard_anti_join <- function(a, b,
                               threshold = .7,
                               progress = FALSE,
                               clean = FALSE, similarity_column = NULL) {
-  jaccard_join(a, b,
-    mode = "anti", by = by,
-    salt_by = block_by,
-    n_gram_width = n_gram_width,
-    n_bands = n_bands, band_width = band_width,
-    similarity_column = similarity_column,
-    threshold = threshold, progress = progress, clean = clean
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = jaccard_join,
+            mode = "anti",
+            block_by = block_by,
+            n_gram_width = n_gram_width,
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -148,15 +154,18 @@ jaccard_left_join <- function(a, b,
                               progress = FALSE,
                               clean = FALSE,
                               similarity_column = NULL) {
-  jaccard_join(a, b,
-    mode = "left", by = by,
-    salt_by = block_by,
-    n_gram_width = n_gram_width,
-    n_bands = n_bands, band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = jaccard_join,
+            mode = "left",
+            block_by = block_by,
+            n_gram_width = n_gram_width,
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -172,15 +181,17 @@ jaccard_right_join <- function(a, b,
                                progress = FALSE,
                                clean = FALSE,
                                similarity_column = NULL) {
-  jaccard_join(a, b,
-    mode = "right", by = by,
-    salt_by = block_by,
-    n_gram_width = n_gram_width,
-    n_bands = n_bands, band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = jaccard_join,
+            mode = "right",
+            block_by = block_by,
+            n_gram_width = n_gram_width,
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -196,14 +207,16 @@ jaccard_full_join <- function(a, b,
                               progress = FALSE,
                               clean = FALSE,
                               similarity_column = NULL) {
-  jaccard_join(a, b,
-    mode = "full", by = by,
-    salt_by = block_by,
-    n_gram_width = n_gram_width,
-    n_bands = n_bands, band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = jaccard_join,
+            mode = "full",
+            block_by = block_by,
+            n_gram_width = n_gram_width,
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
