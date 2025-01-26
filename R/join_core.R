@@ -33,13 +33,25 @@ multi_by_validate <- function(a, b, by) {
 
 #' Perform a Fuzzy-Join With an Arbitrary Distance Metric
 #'
-#' @param a the first dataframe to join
-#' @param b the second dataframe to join
-#' @param by columns on which to join
-#' @param block_by any columns to block (perform exact matching on) (where supported)
-#' @param similarity_column name of the column with the distance metric in the
-#' resulting dataframe
-#' @param join_func the joining function responsible for performing the join
+#' Code used by zoomerjoin to perform dplyr-style joins. Users wishing to write
+#' their own joining functions can extend zoomerjoin's functionality by writing
+#' joining functions to use with `fuzzy_join_core`.
+#'
+#' @param a,b The two dataframes to join.
+#' @param by A named vector indicating which columns to join on. Format should
+#'   be the same as dplyr: `by = c("column_name_in_df_a" =
+#'   "column_name_in_df_b")`, but two columns must be specified in each dataset
+#'   (x column and y column). Specification made with `dplyr::join_by()` are
+#'   also accepted.
+#' @param block_by A named vector indicating which columns to 'block' (perform exact joining) on. Format should
+#'   be the same as dplyr: `by = c("column_name_in_df_a" =
+#'   "column_name_in_df_b")`, but two columns must be specified in each dataset
+#'   (x column and y column). Specification made with `dplyr::join_by()` are
+#'   also accepted.
+#' @param similarity_column An optional character vector. If provided, the data
+#'   frame will contain a column with this name giving the similarity
+#'   between the two fields. Extra column will not be present if anti-joining.
+#' @param join_func the joining function responsible for performing the join.
 #' @param mode the dplyr-style type of join you want to perform
 #' @param ... Other parameters to be passed to the joining function
 #'

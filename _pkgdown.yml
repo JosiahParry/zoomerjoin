@@ -30,6 +30,9 @@ reference:
     contents:
       - em_link
 
+  - title: Extend Zoomerjoin with Custom Functions
+    contents:
+      - fuzzy_join_core
 
   - title: String deduplication
     contents:
