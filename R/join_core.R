@@ -1,14 +1,51 @@
-#' Core Fuzzy Joining Logic
+multi_by_validate <- function(a, b, by) {
+  # first pass to handle dplyr::join_by() call
+  if (inherits(by, "dplyr_join_by")) {
+    if (any(by$condition != "==")) {
+      stop("Inequality joins are not supported.")
+    }
+    new_by <- by$y
+    names(new_by) <- by$x
+    by <- new_by
+  }
+
+  if (is.null(by)) {
+    by_a <- intersect(names(a), names(b))
+    by_b <- by_a
+    stopifnot("Can't Determine columns to match on" = length(by_a)!=0)
+  } else {
+    if (!is.null(names(by))) {
+      by_a <- names(by)
+      by_b <- by
+    } else {
+      by_a <- by
+      by_b <- by
+    }
+    stopifnot(by_a %in% names(a))
+    stopifnot(by_b %in% names(b))
+  }
+  return(list(
+    by_a,
+    by_b
+  ))
+}
+
+
+#' Perform a Fuzzy-Join With an Arbitrary Distance Metric
 #'
 #' @param a the first dataframe to join
 #' @param b the second dataframe to join
 #' @param by columns on which to join
+#' @param block_by columns on which to perform and EXACT join
+#' @param similarity_column name of the column with the distance metric in the
+#' resulting dataframe
 #' @param join_func the joining function responsible for performing the join
 #' @param mode the dplyr-style type of join you want to perform
 #' @param block_on any columns to block (perform exact matching on) (where supported)
 #' @param ... Other parameters to be passed to the joining function
 #'
 #' @importFrom dplyr pull %>%
+#' @export
 fuzzy_join_core <- function(a, b, by, join_func, mode, block_by = NULL, similarity_column = NULL, ...) {
   a <- tibble::as_tibble(a)
   b <- tibble::as_tibble(b)

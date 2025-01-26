@@ -1,36 +1,3 @@
-multi_by_validate <- function(a, b, by) {
-  # first pass to handle dplyr::join_by() call
-  if (inherits(by, "dplyr_join_by")) {
-    if (any(by$condition != "==")) {
-      stop("Inequality joins are not supported.")
-    }
-    new_by <- by$y
-    names(new_by) <- by$x
-    by <- new_by
-  }
-
-  if (is.null(by)) {
-    by_a <- intersect(names(a), names(b))
-    by_b <- by_a
-    stopifnot("Can't Determine columns to match on" = length(by_a)!=0)
-  } else {
-    if (!is.null(names(by))) {
-      by_a <- names(by)
-      by_b <- by
-    } else {
-      by_a <- by
-      by_b <- by
-    }
-    stopifnot(by_a %in% names(a))
-    stopifnot(by_b %in% names(b))
-  }
-  return(list(
-    by_a,
-    by_b
-  ))
-}
-
-
 # ` @importFrom stats pnorm
 euclidean_join <- function(a, b, by_a, by_b, block_by_a = NULL, block_by_b = NULL, n_bands = 30, band_width = 10, threshold = 1.0, r = .5, progress = FALSE) {
   stopifnot("'radius' must be greater than 0" = threshold > 0)

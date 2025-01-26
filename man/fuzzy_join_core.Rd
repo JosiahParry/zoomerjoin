@@ -2,7 +2,7 @@
 % Please edit documentation in R/join_core.R
 \name{fuzzy_join_core}
 \alias{fuzzy_join_core}
-\title{Core Fuzzy Joining Logic}
+\title{Perform a Fuzzy-Join With an Arbitrary Distance Metric}
 \usage{
 fuzzy_join_core(
   a,
@@ -26,10 +26,15 @@ fuzzy_join_core(
 
 \item{mode}{the dplyr-style type of join you want to perform}
 
+\item{block_by}{columns on which to perform and EXACT join}
+
+\item{similarity_column}{name of the column with the distance metric in the
+resulting dataframe}
+
 \item{...}{Other parameters to be passed to the joining function}
 
 \item{block_on}{any columns to block (perform exact matching on) (where supported)}
 }
 \description{
-Core Fuzzy Joining Logic
+Perform a Fuzzy-Join With an Arbitrary Distance Metric
 }
