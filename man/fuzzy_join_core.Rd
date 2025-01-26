@@ -26,14 +26,12 @@ fuzzy_join_core(
 
 \item{mode}{the dplyr-style type of join you want to perform}
 
-\item{block_by}{columns on which to perform and EXACT join}
+\item{block_by}{any columns to block (perform exact matching on) (where supported)}
 
 \item{similarity_column}{name of the column with the distance metric in the
 resulting dataframe}
 
 \item{...}{Other parameters to be passed to the joining function}
-
-\item{block_on}{any columns to block (perform exact matching on) (where supported)}
 }
 \description{
 Perform a Fuzzy-Join With an Arbitrary Distance Metric

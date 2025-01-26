@@ -36,12 +36,11 @@ multi_by_validate <- function(a, b, by) {
 #' @param a the first dataframe to join
 #' @param b the second dataframe to join
 #' @param by columns on which to join
-#' @param block_by columns on which to perform and EXACT join
+#' @param block_by any columns to block (perform exact matching on) (where supported)
 #' @param similarity_column name of the column with the distance metric in the
 #' resulting dataframe
 #' @param join_func the joining function responsible for performing the join
 #' @param mode the dplyr-style type of join you want to perform
-#' @param block_on any columns to block (perform exact matching on) (where supported)
 #' @param ... Other parameters to be passed to the joining function
 #'
 #' @importFrom dplyr pull %>%
