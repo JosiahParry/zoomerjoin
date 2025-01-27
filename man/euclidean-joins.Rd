@@ -93,9 +93,7 @@ of greater than .8 have a >99.9\% chance of being compared.}
 \item{r}{Hyperparameter used to govern the sensitivity of the locality
 sensitive hash. Corresponds to the width of the hash bucket in the LSH
 algorithm. Increasing values of \code{r} mean more hash collisions and higher
-sensitivity (fewer false-negatives) at the cost of lower specificity (more
-false-positives and longer run time). For more information, see the
-description in \doi{10.1145/997817.997857}.}
+sensitivity (fewer false-negatives) at the cost of lower specificity (more false-positives and longer run time). For more information, see the description in \doi{10.1145/997817.997857}.}
 
 \item{progress}{Set to \code{TRUE} to print progress.}
 }

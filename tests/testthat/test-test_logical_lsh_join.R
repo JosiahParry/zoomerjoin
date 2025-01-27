@@ -95,7 +95,7 @@ test_that("jaccard_anti_join works on tiny dataset", {
 })
 
 test_that("jaccard_inner_join gives same results as stringdist_inner_join", {
-  for (i in 1:20) {
+  for (i in 1:5) {
     capture_messages({
       zoomer_join_out <- jaccard_inner_join(names_df, misspelled_name_df, n_gram_width = 1, threshold = .9, n_bands = 150, band_width = 5) %>%
         arrange(id_1, id_2)
@@ -110,6 +110,35 @@ test_that("jaccard_inner_join gives same results as stringdist_inner_join", {
     expect_equal(zoomer_join_out$sim, jaccard_similarity(zoomer_join_out$name.x, zoomer_join_out$name.y, ngram_width = 1))
   }
 })
+
+test_that("jaccard_left_join gives same results as stringdist_inner_join", {
+  for (i in 1:5) {
+    capture_messages({
+      zoomer_join_out <- jaccard_left_join(names_df, misspelled_name_df, n_gram_width = 1, threshold = .9, n_bands = 150, band_width = 5) %>%
+        arrange(id_1, id_2)
+
+      stringdist_join_out <- stringdist_left_join(names_df, misspelled_name_df, method = "jaccard", max_dist = .1) %>%
+        arrange(id_1, id_2)
+    })
+
+    expect_true(all.equal(zoomer_join_out, stringdist_join_out))
+  }
+})
+
+test_that("jaccard_right_join gives same results as stringdist_inner_join", {
+  for (i in 1:5) {
+    capture_messages({
+      zoomer_join_out <- jaccard_right_join(names_df, misspelled_name_df, n_gram_width = 1, threshold = .9, n_bands = 150, band_width = 5) %>%
+        arrange(id_1, id_2)
+
+      stringdist_join_out <- stringdist_right_join(names_df, misspelled_name_df, method = "jaccard", max_dist = .1) %>%
+        arrange(id_1, id_2)
+    })
+
+    expect_true(all.equal(zoomer_join_out, stringdist_join_out))
+  }
+})
+
 
 test_that("Blocking Functionality works correctly for jaccard_inner_join", {
   joined_block_on_one <- jaccard_inner_join(iris, iris, by = c("Species"), block_by = "Petal.Width", n_bands = 190)

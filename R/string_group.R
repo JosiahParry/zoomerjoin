@@ -69,9 +69,9 @@ jaccard_string_group <- function(string, n_gram_width = 2, n_bands = 45, band_wi
 
   graph <- igraph::graph_from_edgelist(pairs)
   if (packageVersion("igraph") < "2.0.0") {
-    fc <- igraph::fastgreedy.community(igraph::as.undirected(graph))
+    fc <- igraph::fastgreedy.community(igraph::as_undirected(graph))
   } else {
-    fc <- igraph::cluster_fast_greedy(igraph::as.undirected(graph))
+    fc <- igraph::cluster_fast_greedy(igraph::as_undirected(graph))
   }
 
   groups <- igraph::groups(fc)

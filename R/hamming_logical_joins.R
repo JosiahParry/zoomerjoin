@@ -73,16 +73,18 @@ hamming_inner_join <- function(a, b,
                                progress = FALSE,
                                clean = FALSE,
                                similarity_column = NULL) {
-  hamming_join(a, b,
-    mode = "inner",
-    by = by,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = hamming_join,
+            mode = "inner",
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
+
 }
 
 #' @rdname hamming-joins
@@ -95,15 +97,16 @@ hamming_anti_join <- function(a, b,
                               progress = FALSE,
                               clean = FALSE,
                               similarity_column = NULL) {
-  hamming_join(a, b,
-    mode = "anti",
-    by = by,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = hamming_join,
+            mode = "anti",
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -117,15 +120,16 @@ hamming_left_join <- function(a, b,
                               progress = FALSE,
                               clean = FALSE,
                               similarity_column = NULL) {
-  hamming_join(a, b,
-    mode = "left",
-    by = by,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = hamming_join,
+            mode = "left",
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -139,15 +143,16 @@ hamming_right_join <- function(a, b,
                                progress = FALSE,
                                clean = FALSE,
                                similarity_column = NULL) {
-  hamming_join(a, b,
-    mode = "right",
-    by = by,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = hamming_join,
+            mode = "right",
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }
 
@@ -162,14 +167,14 @@ hamming_full_join <- function(a, b,
                               progress = FALSE,
                               clean = FALSE,
                               similarity_column = NULL) {
-  hamming_join(a, b,
-    mode = "full",
-    by = by,
-    n_bands = n_bands,
-    band_width = band_width,
-    threshold = threshold,
-    progress = progress,
-    similarity_column = similarity_column,
-    clean = clean
+  fuzzy_join_core(a = a, b = b, by = by,
+            join_func = hamming_join,
+            mode = "full",
+            n_bands = n_bands,
+            band_width = band_width,
+            threshold = threshold,
+            progress = progress,
+            similarity_column = similarity_column,
+            clean = clean
   )
 }

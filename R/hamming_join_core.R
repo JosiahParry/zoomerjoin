@@ -1,5 +1,6 @@
-hamming_join <- function(a, b, mode, by, n_bands, band_width,
-                         threshold, progress = FALSE, similarity_column = NULL,
+hamming_join <- function(a, b, by_a, by_b, block_by_a, block_by_b, n_bands, band_width,
+                         threshold, progress = FALSE,
+                         similarity_column = NULL,
                          clean = FALSE) {
   a <- tibble::as_tibble(a)
   b <- tibble::as_tibble(b)
@@ -13,9 +14,6 @@ hamming_join <- function(a, b, mode, by, n_bands, band_width,
   stopifnot("'band_width' must be greater than 0" = band_width > 0)
   stopifnot("'band_width' must be length than 1" = length(band_width) == 1)
 
-  by <- simple_by_validate(a, b, by)
-  by_a <- by[[1]]
-  by_b <- by[[2]]
   stopifnot("'by' vectors must have length 1" = length(by_a) == 1)
   stopifnot("'by' vectors must have length 1" = length(by_b) == 1)
 
@@ -51,49 +49,15 @@ hamming_join <- function(a, b, mode, by, n_bands, band_width,
     seed = 1
   )
 
-  if (!is.null(similarity_column)) {
-    similarities <- hamming_distance(
+  sims <- hamming_distance(
       pull(a[match_table[, 1], ], by_a),
       pull(b[match_table[, 2], ], by_b)
-    )
-  }
-
-  # Rename Columns in Both Tables
-  names_in_both <- intersect(names(a), names(b))
-  names(a)[names(a) %in% names_in_both] <- paste0(names(a)[names(a) %in% names_in_both], ".x")
-  names(b)[names(b) %in% names_in_both] <- paste0(names(b)[names(b) %in% names_in_both], ".y")
-
-  matches <- dplyr::bind_cols(a[match_table[, 1], ], b[match_table[, 2], ])
-
-  if (!is.null(similarity_column)) {
-    matches[, similarity_column] <- similarities
-  }
-
-  # No need to look for rows that don't match
-  if (mode == "inner") {
-    return(matches)
-  }
-
-  switch(mode,
-    "left" = {
-      not_matched_a <- collapse::`%!iin%`(seq_len(nrow(a)), match_table[, 1])
-      matches <- dplyr::bind_rows(matches, a[not_matched_a, ])
-    },
-    "right" = {
-      not_matched_b <- collapse::`%!iin%`(seq_len(nrow(b)), match_table[, 2])
-      matches <- dplyr::bind_rows(matches, b[not_matched_b, ])
-    },
-    "full" = {
-      not_matched_a <- collapse::`%!iin%`(seq_len(nrow(a)), match_table[, 1])
-      not_matched_b <- collapse::`%!iin%`(seq_len(nrow(b)), match_table[, 2])
-      matches <- dplyr::bind_rows(matches, a[not_matched_a, ], b[not_matched_b, ])
-    },
-    "anti" = {
-      not_matched_a <- collapse::`%!iin%`(seq_len(nrow(a)), match_table[, 1])
-      not_matched_b <- collapse::`%!iin%`(seq_len(nrow(b)), match_table[, 2])
-      matches <- dplyr::bind_rows(a[not_matched_a, ], b[not_matched_b, ])
-    }
   )
 
-  matches
+  return(
+         list(
+              match_table = match_table,
+              similarities = sims
+         )
+  )
 }
